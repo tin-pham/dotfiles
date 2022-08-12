@@ -1,0 +1,47 @@
+# Config 
+alias rc='v ~/.zshrc'
+alias env='v ~/.zshenv'
+alias ali='v ~/.zsh_alias'
+
+# Alias
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -i'
+
+alias vim='nvim'
+alias v\.='nvim ./'
+alias v='nvim'
+alias vimdiff='nvim -d'
+alias t1='tree -L 1'
+alias t2='tree -L 2'
+alias t3='tree -L 3'
+alias k1='kill %1'
+alias k2='kill %2'
+alias k3='kill %3'
+
+alias lc='colorls --sd'
+alias cnv='cd ~/.config/nvim'
+alias cw='cd "$PROJECT"'
+alias ct='cd "$HDD/Coding/test"'
+alias cl='cd "$HDD/Coding/Learning2/git-course/"'
+alias cu='cd ~/Desktop/College/'
+alias cc="ranger $XDG_CONFIG_HOME"
+alias clearswap='rm ~/.local/share/nvim/swap/*'
+
+alias maketags='ctags -R --exclude=.git --exclude=node_modules .'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+alias mongod-start='mongod --config ~/.config/mongodb/mongod.cfg'
+
+# Kitty Alias
+alias icat="kitty +kitten icat"
+alias vt="v ~/.config/kitty/kitty.conf"
+# Flatpak
+alias discord='flatpak run com.discordapp.Discord'
+
+alias cn='cd "$HDD/notes"'
+
+alias b='WD="$(pwd)";cd "$HDD/Documents/Books";ranger;cd "$WD"'
+alias c='WD="$(pwd)";cd "$HDD/Documents/Cheatsheets";ranger;cd "$WD"'
+
+alias sioyek='flatpak run com.github.ahrm.sioyek'
