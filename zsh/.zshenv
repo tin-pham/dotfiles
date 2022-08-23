@@ -1,13 +1,15 @@
 alias cspell='cspell-cli'
 
-export ZSH=~/.oh-my-zsh
-export ZSH_CUSTOM=$ZSH/custom
+#export ZSH=~/.oh-my-zsh
+#export ZSH_CUSTOM=$ZSH/custom
+
 export XDG_CONFIG_HOME=~/.config
 export XDG_CACHE_HOME=~/.cache
 export XDG_DATA_HOME=~/.local/share
+
 export SDL_AUDIODRIVER=dsound
 
-export NVM_DIR="$XDG_DATA_HOME"/nvm && source "$NVM_DIR/nvm.sh"
+#export NVM_DIR="$XDG_DATA_HOME"/nvm && source "$NVM_DIR/nvm.sh"
 
 # Export
 export HDD="/media/shin/hdd"
@@ -29,3 +31,5 @@ export HISTSIZE=2000
 export SAVEHIST=$HISTSIZE
 
 export GLFW_IM_MODULE=ibus
+
+export ZIM_HOME="${XDG_DATA_HOME}/zim"
