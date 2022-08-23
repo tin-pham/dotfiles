@@ -1,5 +1,6 @@
+zmodule trapd00r/zsh-syntax-highlighting-filetypes
 zmodule zsh-users/zsh-autosuggestions
 zmodule zsh-users/zsh-completions --fpath src
 zmodule completion
 zmodule spaceship-prompt/spaceship-prompt --name spaceship --no-submodules
-zmodule trapd00r/zsh-syntax-highlighting-filetypes
+zmodule hlissner/zsh-autopair
