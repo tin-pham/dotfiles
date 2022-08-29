@@ -1,0 +1,1 @@
+/etc/portage/savedconfig/app-admin/slstatus-9999

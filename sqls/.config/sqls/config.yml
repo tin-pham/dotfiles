@@ -1,0 +1,10 @@
+lowercaseKeywords: true
+connections:
+  - alias: postgres
+    driver: postgresql
+    proto: tcp
+    user: tinpham
+    passwd: Pbt12345++
+    host: 127.0.0.1
+    port: 5432
+    dbName: learning
