@@ -23,8 +23,8 @@ alias lc='colorls --sd'
 alias ls='ls --color'
 alias cnv='cd ~/.config/nvim'
 alias cw='cd "$PROJECT"'
-alias ct='cd "$HDD/Coding/test"'
-alias cl='cd "$HDD/Coding/Learning2/git-course/"'
+alias ct='cd "$HHD/Coding/test"'
+alias cl='cd "$HHD/Coding/Learning2/git-course/"'
 alias cu='cd ~/Desktop/College/'
 alias cc="ranger $XDG_CONFIG_HOME"
 alias clearswap='rm ~/.local/share/nvim/swap/*'
@@ -42,7 +42,7 @@ alias discord='flatpak run com.discordapp.Discord'
 
 alias cn='cd "$HDD/notes"'
 
-alias b='WD="$(pwd)";cd "$HDD/Documents/Books";ranger;cd "$WD"'
-alias c='WD="$(pwd)";cd "$HDD/Documents/Cheatsheets";ranger;cd "$WD"'
+alias b='WD="$(pwd)";cd "$HHD/Documents/Books";ranger;cd "$WD"'
+alias c='WD="$(pwd)";cd "$HHD/Documents/Cheatsheets";ranger;cd "$WD"'
 
 alias sioyek='flatpak run com.github.ahrm.sioyek'

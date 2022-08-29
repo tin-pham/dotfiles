@@ -19,7 +19,6 @@ zstyle ':zim:zmodule' use 'git'
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
 
-#ZSH_THEME="spaceship"
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
 
@@ -30,23 +29,15 @@ setopt extendedglob
 # Correction
 setopt correctall
 
-# Prompt
-# autoload -U promptinit
-# promptinit
-# prompt gentoo
-
-#source $ZSH/oh-my-zsh.sh
-# source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-# source ~/.zsh/zsh-completions/zsh-completions.plugin.zsh
+backward-kill-dir () {
+    local WORDCHARS=${WORDCHARS/\/}
+    zle backward-kill-word
+    zle -f kill
+}
+zle -N backward-kill-dir
+bindkey '^[^?' backward-kill-dir
 
 bindkey -e
 bindkey '^ ' autosuggest-accept
-# Autopair ZSH
-# source ~/.zsh/zsh-autopair/autopair.zsh
-# autopair-init
 
-
-#export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-#export PATH=$PATH:/home/shin/.spicetify
+neofetch

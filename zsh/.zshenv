@@ -12,14 +12,14 @@ export SDL_AUDIODRIVER=dsound
 #export NVM_DIR="$XDG_DATA_HOME"/nvm && source "$NVM_DIR/nvm.sh"
 
 # Export
-export HDD="/media/shin/hdd"
+export HHD="/media/hhd"
 export ZSH="/home/shin/.oh-my-zsh"
 export EDITOR='nvim'
 export VISUAL='nvim'
 export JAVA_HOME='/usr/lib/jvm/java-11-openjdk-amd64/'
 export MANPAGER="nvim +Man!"
 export PATH=/usr/local/bin:~/.npm-global/bin:~/.local/bin:~/bin:$PATH 
-export PROJECT="$HDD/Coding/Project/clothes-shop"
+export PROJECT="$HHD/Coding/Project/clothes-shop"
 
 export FZF_DEFAULT_OPTS='--preview "bat --style=numbers --color=always --line-range :500 {}"'
 # Fix Background Color in tmux
@@ -33,3 +33,5 @@ export SAVEHIST=$HISTSIZE
 export GLFW_IM_MODULE=ibus
 
 export ZIM_HOME="${XDG_DATA_HOME}/zim"
+
+export TERM="kitty"
