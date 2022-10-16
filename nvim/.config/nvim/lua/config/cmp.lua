@@ -1,5 +1,34 @@
 local M = {}
 
+local kind_icons = {
+  Text = "",
+  Method = "",
+  Function = "",
+  Constructor = "",
+  Field = "",
+  Variable = "",
+  Class = "ﴯ",
+  Interface = "",
+  Module = "",
+  Property = "ﰠ",
+  Unit = "",
+  Value = "",
+  Enum = "",
+  Keyword = "",
+  Snippet = "",
+  Color = "",
+  File = "",
+  Reference = "",
+  Folder = "",
+  EnumMember = "",
+  Constant = "",
+  Struct = "",
+  Event = "",
+  Operator = "",
+  TypeParameter = "",
+}
+
+
 function M.setup()
   local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -8,9 +37,12 @@ function M.setup()
 
   local luasnip = require 'luasnip'
   local cmp = require 'cmp'
+	local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+	
+	cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
 
   cmp.setup {
-    completion = { completeopt = 'menu,menuone,noinsert', keyword_length = 1 },
+		 completion = { completeopt = "menu,menuone,noinsert,noselect", keyword_length = 1 },
     experimental = { native_menu = false, ghost_text = false },
     snippet = {
       expand = function(args)
@@ -19,9 +51,15 @@ function M.setup()
     },
     formatting = {
       format = function(entry, vim_item)
+        vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+
+				-- Source
         vim_item.menu = ({
           luasnip = '[Snip]',
+					nvim_lsp = '[LSP]',
           buffer = '[Buffer]',
+					path = '[Path]',
+				  nvim_lsp_signature_help = "[Signature]",
           --treesitter = '[Treesitter]',
         })[entry.source.name]
         return vim_item
@@ -34,16 +72,7 @@ function M.setup()
       ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
       ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
       ['<C-e>'] = cmp.mapping { i = cmp.mapping.close(), c = cmp.mapping.close() },
-      ['<CR>'] = cmp.mapping {
-        i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
-        c = function(fallback)
-          if cmp.visible() then
-            cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
-          else
-            fallback()
-          end
-        end,
-      },
+			['<CR>'] = cmp.mapping.confirm({select = true}),
       ['<Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
@@ -74,17 +103,24 @@ function M.setup()
       }),
     },
     sources = {
+			 { name = "nvim_lsp" },
       { name = 'buffer' },
       { name = 'luasnip' },
       { name = 'path' },
       { name = 'spell' },
       { name = 'emoji' },
       { name = 'calc' },
+		 { name = 'nvim_lsp_signature_help' },
     },
-		window = { 
+		window = {
+       completion = { -- rounded border; thin-style scrollbar
+      border = 'rounded',
+      scrollbar = '║',
+    },
     documentation = {
-      border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-      winhighlight = 'NormalFloat:NormalFloat,FloatBorder:TelescopeBorder',
+      border = 'rounded',
+      --border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+      --winhighlight = 'NormalFloat:NormalFloat,FloatBorder:TelescopeBorder',
     },
 		},
   }
@@ -101,9 +137,10 @@ function M.setup()
     sources = cmp.config.sources({
       { name = 'path' },
     }, {
-      { name = 'cmdline' },
+      { name = 'cmdline'},
     }),
   })
 end
+
 
 return M

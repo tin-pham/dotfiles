@@ -1,9 +1,9 @@
 ncmpcpp_directory = "~/.config/ncmpcpp"
 
-lyrics_directory = "/media/shin/hdd/Musics/lyrics"
+lyrics_directory = "/media/hhd/Musics/lyrics"
 mpd_host = "localhost"
 mpd_port = "6600"
-mpd_music_dir = "/media/shin/hdd/Musics"
+mpd_music_dir = "/media/hhd/Musics"
 
 # Visualizer
 visualizer_data_source = "/tmp/mpd.fifo"

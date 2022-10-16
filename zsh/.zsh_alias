@@ -24,7 +24,7 @@ alias ls='ls --color'
 alias cnv='cd ~/.config/nvim'
 alias cw='cd "$PROJECT"'
 alias ct='cd "$HHD/Coding/test"'
-alias cl='cd "$HHD/Coding/Learning2/git-course/"'
+alias cl='cd "$HHD/Coding/Learning2/nest"'
 alias cu='cd ~/Desktop/College/'
 alias cc="ranger $XDG_CONFIG_HOME"
 alias clearswap='rm ~/.local/share/nvim/swap/*'
@@ -36,9 +36,11 @@ alias mongod-start='mongod --config ~/.config/mongodb/mongod.cfg'
 
 # Kitty Alias
 alias icat="kitty +kitten icat"
-alias vt="v ~/.config/kitty/kitty.conf"
 # Flatpak
 alias discord='flatpak run com.discordapp.Discord'
+
+# Terminal
+alias vt="v ~/.config/alacritty/alacritty.yml"
 
 alias cn='cd "$HDD/notes"'
 

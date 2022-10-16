@@ -4,7 +4,7 @@ export PATH=$PATH:~/bin
 xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
 xrandr --output HDMI-1-1 --auto --left-of eDP-1-1
-xrandr --output eDP-1-1 --brightness .8
+xrandr --output eDP-1-1 --gamma .5:1:1 --brightness 0.55
 
 #set_monitor &
 set_bg &

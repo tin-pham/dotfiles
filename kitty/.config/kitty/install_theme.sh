@@ -1,6 +1,6 @@
 #!/bin/bash
 
-themes=('Chalkboard', 'Floraverse')
+themes=('Chalkboard', 'Floraverse', 'Lavandula')
 
 for theme in ${themes[@]} 
 do

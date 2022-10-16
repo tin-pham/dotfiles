@@ -1,7 +1,6 @@
 local api = vim.api
 local g = vim.g
 local opt = vim.opt
-
 -- Remap leader and local leader to <Space>
 api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
 g.mapleader = " "
@@ -11,16 +10,34 @@ opt.termguicolors = true -- Enable colors in terminal
 opt.hlsearch = true --Set highlight on search
 opt.number = true --Make line numbers default
 opt.relativenumber = true --Make relative number default
-opt.breakindent = true --Enable break indent
 opt.undofile = true --Save undo history
 opt.ignorecase = true --Case insensitive searching unless /C or capital in search
 opt.smartcase = true -- Smart case
 opt.updatetime = 250 --Decrease update time
 opt.signcolumn = "yes" -- Always show sign column
 opt.clipboard = "unnamedplus" -- Access system clipboard
-opt.winbar = "%f" -- Winbar in neovim 0.8
 opt.timeoutlen = 300 -- Time in milliseconds to wait for a mapped sequence to complete
-opt.laststatus = 0
+opt.laststatus = 0 -- Disable bottom status bar
+opt.splitright = true -- Split right instead of left 
+opt.splitbelow = true -- Split below instead of top
+opt.fillchars = {eob = " "} -- Remove tilde in empty line
+opt.scrolloff = 8 -- Screensize to keep above/below the cursor  
+opt.sidescrolloff = 5 -- Screensize to keep left/right the cursor
+opt.winbar = '%f'
+
+opt.expandtab = true
+opt.smarttab = true
+opt.tabstop = 2
+opt.softtabstop = 2
+opt.shiftwidth= 2
+opt.autoindent = true
+
+
+--api.nvim_command('filetype plugin indent on')
+
+api.nvim_create_autocmd('BufEnter', { callback = function()
+	opt.formatoptions = opt.formatoptions - 'c' - 'r' - 'o'
+end})
 
 -- Native Find --
 -- Search reletive to current file instead of /usr/include directory
@@ -31,6 +48,7 @@ opt.wildignorecase = true -- Search case-insentitive
 opt.wildignore:append "**/node_modules/*"
 opt.wildignore:append "**/.git/*"
 opt.wildignore:append "**/build/*"
+--vim.g.completeopt = 'menu,menuone,noselect,noinsert'
 
 -- Highlight on yank
 vim.cmd [[
@@ -39,3 +57,7 @@ vim.cmd [[
     autocmd TextYankPost * silent! lua vim.highlight.on_yank()
   augroup end
 ]]
+
+
+-- Disable automatic commenting
+vim.cmd('autocmd FileType * setlocal formatoptions-=cro')

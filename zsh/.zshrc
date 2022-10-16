@@ -19,6 +19,9 @@ zstyle ':zim:zmodule' use 'git'
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
 
+# source /usr/share/bash-completion/completions/fzf
+# source /usr/share/fzf/key-bindings.zsh
+
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
 

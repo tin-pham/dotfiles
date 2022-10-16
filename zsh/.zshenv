@@ -18,8 +18,11 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 export JAVA_HOME='/usr/lib/jvm/java-11-openjdk-amd64/'
 export MANPAGER="nvim +Man!"
-export PATH=/usr/local/bin:~/.npm-global/bin:~/.local/bin:~/bin:$PATH 
-export PROJECT="$HHD/Coding/Project/clothes-shop"
+export PROJECT="$HHD/Coding/Project/social_image_server" export BOOKS="$HHD/Documents/Books"
+
+export NPM_PATH=~/.local/share/npm/bin
+export YARN_PATH=~/.local/share/yarn/global/bin
+export PATH=/usr/local/bin:~/.local/bin:~/bin:$NPM_PATH:$YARN_PATH:$PATH 
 
 export FZF_DEFAULT_OPTS='--preview "bat --style=numbers --color=always --line-range :500 {}"'
 # Fix Background Color in tmux
