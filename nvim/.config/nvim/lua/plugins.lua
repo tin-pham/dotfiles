@@ -231,6 +231,16 @@ function M.setup()
          end,
       }
 
+      use {
+        "akinsho/toggleterm.nvim",
+        keys = { [[<C-\>]] },
+        cmd = { "Toggleterm", "TermExec" },
+        module = { "toggleterm", "toggleterm.terminal" },
+        config = function ()
+          require('config.toggleterm').setup()
+        end
+      }
+
 
 		-- Tweaks
 		--> Whichkey

@@ -26,9 +26,9 @@ keymap('v', '<', '<gv', default_opts)
 keymap('v', '>', '>gv', default_opts)
 
 -- Open terminal
-keymap('n', '<C-\\>', ':terminal<cr>', default_opts)
-keymap('i', '<C-\\>', ':terminal<cr>', default_opts)
-keymap('v', '<C-\\>', ':terminal<cr>', default_opts)
+-- keymap('n', '<C-\\>', ':terminal<cr>', default_opts)
+-- keymap('i', '<C-\\>', ':terminal<cr>', default_opts)
+-- keymap('v', '<C-\\>', ':terminal<cr>', default_opts)
 
 -- Toggle tree
 keymap('n', '<C-f>', ':NvimTreeToggle<CR>', default_opts);
