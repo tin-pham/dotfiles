@@ -15,7 +15,7 @@ function M.setup(servers, options)
 	}
 
 	require('mason-tool-installer').setup {
-		ensure_installed = { 'prettierd', 'shfmt', 'fixjson', 'stylua', 'selene', 'shellcheck', 'clang-format', 'sqlfluff', 'eslint-lsp' },
+		ensure_installed = { 'prettierd', 'shfmt', 'fixjson', 'stylua', 'selene', 'shellcheck', 'clang-format', 'sqlfluff', 'eslint_d' },
 		auto_update = true,
 		run_on_start = true,
 	}
@@ -37,6 +37,14 @@ function M.setup(servers, options)
 			local opts = vim.tbl_deep_extend("force", options, servers["sumneko_lua"] or {})
 			lspconfig.sumneko_lua.setup(require("neodev").setup { lspconfig = opts })
 		end,
+    ["tsserver"] = function ()
+      local opts = vim.tbl_deep_extend("force", options, servers['tsserver'] or {}) 
+      require('typescript').setup {
+        disable_commands = false,
+        debug = false,
+        server = opts
+      }
+    end
 	}
 end
 

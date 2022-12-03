@@ -21,7 +21,7 @@ end
 local sources = {
 	-- formatting
 	b.formatting.prettierd,
-  b.formatting.eslint,
+  b.formatting.eslint_d,
 	b.formatting.shfmt,
 	b.formatting.fixjson,
 	b.formatting.clang_format,
@@ -29,13 +29,13 @@ local sources = {
 	with_root_file(b.formatting.stylua, "stylua.toml"),
 
 	-- diagnostics
-	b.diagnostics.eslint,
+	b.diagnostics.eslint_d,
 	b.diagnostics.sqlfluff.with({ extra_args = {'--dialect', 'postgres'} }),
 	with_root_file(b.diagnostics.selene, "selene.toml"),
 	with_diagnostics_code(b.diagnostics.shellcheck),
 
 	-- code actions
-	b.code_actions.eslint,
+	b.code_actions.eslint_d,
 	--b.code_actions.gitsigns,
 	--b.code_actions.gitrebase,
 

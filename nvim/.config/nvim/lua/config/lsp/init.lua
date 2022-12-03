@@ -35,20 +35,6 @@ local servers = {
   },
   sqls = {},
 	jdtls = {},
-  prismals = {},
-   yamlls = {
-    schemastore = {
-      enable = true,
-    },
-    settings = {
-      yaml = {
-        hover = true,
-        completion = true,
-        validate = true,
-        schemas = require("schemastore").json.schemas(),
-      },
-    },
-  },
 }
 
 local function on_attach(client, bufnr)

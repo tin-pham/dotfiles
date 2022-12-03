@@ -47,6 +47,14 @@ function M.setup()
 				require('config.rose-pine').setup()
 			end,
 		}
+
+    -- use {
+    --    'shaunsingh/nord.nvim',
+    --   config = function ()
+    --     require('config.nord').setup()
+    --   end
+    -- }
+
 		-->Better icons
 		use {
 			'kyazdani42/nvim-web-devicons',
@@ -155,6 +163,8 @@ function M.setup()
 				require('config.lsp').setup()
 			end
 		}
+
+    use { "jose-elias-alvarez/typescript.nvim", module = { "typescript" } }
 		----> Trouble
 		use {
 			'folke/trouble.nvim',
