@@ -169,8 +169,8 @@ handle_image() {
         #              -jpeg -tiffcompression jpeg \
         #              -- "${FILE_PATH}" "${IMAGE_CACHE_PATH%.*}" \
         #         && exit 6 || exit 1;;
-        application/pdf)
-          pdftoppm -jpeg -singlefile "${FILE_PATH}" "${IMAGE_CACHE_PATH%.*}" && exit 6;;
+        # application/pdf)
+        #   pdftoppm -jpeg -singlefile "${FILE_PATH}" "${IMAGE_CACHE_PATH%.*}" && exit 6;;
 
 
 

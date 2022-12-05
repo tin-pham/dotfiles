@@ -21,7 +21,7 @@ export MANPAGER="nvim +Man!"
 export PROJECT="$HHD/Coding/Project/social_image_server" export BOOKS="$HHD/Documents/Books"
 
 export NPM_PATH=~/.local/share/npm/bin
-export YARN_PATH=~/.local/share/yarn/global/bin
+export YARN_PATH="$(yarn global bin)"
 export PATH=/usr/local/bin:~/.local/bin:~/bin:$NPM_PATH:$YARN_PATH:$PATH 
 
 export FZF_DEFAULT_OPTS='--preview "bat --style=numbers --color=always --line-range :500 {}"'
