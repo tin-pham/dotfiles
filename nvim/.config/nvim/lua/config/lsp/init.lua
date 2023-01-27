@@ -1,6 +1,19 @@
 local M = {}
 
 local servers = {
+  angularls = {},
+	vimls = {},
+	tsserver = {},
+	cucumber_language_server = {},
+	jsonls = {
+		settings = {
+			json = {
+				schemas = require('schemastore').json.schemas(),
+			},
+		},
+	},
+	sqls = {},
+	jdtls = {},
 	sumneko_lua = {
 		settings = {
 			Lua = {
@@ -12,29 +25,27 @@ local servers = {
 				},
 				diagnostics = {
 					-- Get the language server to recognize the `vim` global
-					globals = { "vim" },
+					globals = { 'vim', 'describe', 'it', 'before_each', 'after_each', 'packer_plugins', 'MiniTest' },
+					-- disable = { "lowercase-global", "undefined-global", "unused-local", "unused-vararg", "trailing-space" },
 				},
 				workspace = {
 					-- Make the server aware of Neovim runtime files
 					library = {
-						[vim.fn.expand "$VIMRUNTIME/lua"] = true,
-						[vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+						[vim.fn.expand('$VIMRUNTIME/lua')] = true,
+						[vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
 					},
+					-- library = vim.api.nvim_get_runtime_file("", true),
+					maxPreload = 2000,
+					preloadFileSize = 50000,
 				},
-			}
-		}
+				completion = { callSnippet = 'Replace' },
+				telemetry = { enable = false },
+				hint = {
+					enable = false,
+				},
+			},
+		},
 	},
-	vimls = {},
-	tsserver = {},
-  jsonls = {
-    settings = {
-      json = {
-        schemas = require("schemastore").json.schemas(),
-      },
-    },
-  },
-  sqls = {},
-	jdtls = {},
 }
 
 local function on_attach(client, bufnr)
@@ -46,21 +57,17 @@ local function on_attach(client, bufnr)
 	-- See `:help formatexpr` for more information.
 	vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
 
-
 	-- Configure key mappings
 	require('config.lsp.keymaps').setup(client, bufnr)
 
 	-- Configure highlighting
 	require('config.lsp.highlighting').setup(client)
 
-
 	-- Configure formatting
-	require("config.lsp.null-ls.formatters").setup(client, bufnr)
-
+	require('config.lsp.null-ls.formatters').setup(client, bufnr)
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
 
 local opts = {
 	on_attach = on_attach,

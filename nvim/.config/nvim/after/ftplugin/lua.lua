@@ -16,5 +16,3 @@ vim.bo.autoindent = true
 -- vim.cmd("hi NormalFloat guibg=None guifg=None")
 -- vim.cmd("hi PMenu guibg=None guifg=None")
 -- vim.cmd("hi LspFloatWinNormal guibg=None guifg=None")
-
-
