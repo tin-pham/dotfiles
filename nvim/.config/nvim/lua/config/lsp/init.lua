@@ -1,7 +1,8 @@
 local M = {}
 
 local servers = {
-  angularls = {},
+	angularls = {},
+	graphql = {},
 	vimls = {},
 	tsserver = {},
 	cucumber_language_server = {},
