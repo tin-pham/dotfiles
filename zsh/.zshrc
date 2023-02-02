@@ -44,3 +44,7 @@ bindkey -e
 bindkey '^ ' autosuggest-accept
 
 neofetch
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)

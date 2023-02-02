@@ -9,7 +9,7 @@ xrandr --output eDP-1-1 --gamma 1:1:1 --brightness 1
 #set_monitor &
 set_bg &
 set_ibus &
-picom -b --experimental-backends 
+#picom -b --experimental-backends #new version didn't have experimental-backends
+picom -b
 
 exec dbus-launch --sh-syntax --exit-with-session dwm
-

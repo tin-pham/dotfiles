@@ -18,7 +18,7 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 export JAVA_HOME='/usr/lib/jvm/java-11-openjdk-amd64/'
 export MANPAGER="nvim +Man!"
-export PROJECT="$HHD/Coding/Project/social_image_server" export BOOKS="$HHD/Documents/Books"
+export PROJECT="$HHD/Coding/Project/restaurant-microservices" export BOOKS="$HHD/Documents/Books"
 
 export NPM_PATH=~/.local/share/npm/bin
 export YARN_PATH="$(yarn global bin)"
@@ -38,3 +38,4 @@ export GLFW_IM_MODULE=ibus
 export ZIM_HOME="${XDG_DATA_HOME}/zim"
 
 export TERM="kitty"
+
