@@ -30,12 +30,14 @@ opt.softtabstop = 2
 opt.shiftwidth = 2
 opt.autoindent = true
 
+opt.autochdir = false
+
 --api.nvim_command('filetype plugin indent on')
 
 api.nvim_create_autocmd('BufEnter', {
-	callback = function()
-		opt.formatoptions = opt.formatoptions - 'c' - 'r' - 'o'
-	end,
+  callback = function()
+    opt.formatoptions = opt.formatoptions - 'c' - 'r' - 'o'
+  end,
 })
 
 -- Native Find --
@@ -59,3 +61,16 @@ vim.cmd([[
 
 -- Disable automatic commenting
 vim.cmd('autocmd FileType * setlocal formatoptions-=cro')
+vim.cmd([[
+  augroup remember_folds
+    autocmd!
+    au BufWinLeave ?* mkview 1
+    au BufWinEnter ?* silent! loadview 1
+  augroup END
+]])
+
+-- Close quickfix list after select
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'qf' },
+  command = [[nnoremap <buffer> <CR> <CR>:cclose<CR>]],
+})

@@ -1,7 +1,4 @@
-require'config'
-require'plugins'.setup()
-
-
-
+require('config')
+require('plugins').setup()
 
 

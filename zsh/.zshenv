@@ -18,7 +18,8 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 export JAVA_HOME='/usr/lib/jvm/java-11-openjdk-amd64/'
 export MANPAGER="nvim +Man!"
-export PROJECT="$HHD/Coding/Project/restaurant-microservices" export BOOKS="$HHD/Documents/Books"
+export PROJECT="$HHD/Coding/Project/shop-ease"
+export BOOKS="$HHD/Documents/Books"
 
 export NPM_PATH=~/.local/share/npm/bin
 export YARN_PATH="$(yarn global bin)"
@@ -39,3 +40,13 @@ export ZIM_HOME="${XDG_DATA_HOME}/zim"
 
 export TERM="kitty"
 
+export OPENMW_MODS="$HHD/LutrisGame/gog/the-elder-scrolls-iii-morrowind-goty-edition/mods"
+export OPENMW_CONFIGS="$HOME/.config/openmw"
+export OPENMW_GAME="$HHD/LutrisGame/gog/the-elder-scrolls-iii-morrowind-goty-edition/game"
+
+# Ibus
+export XMODIFIERS=@im=ibus
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+
+export OPENAI_API_KEY=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

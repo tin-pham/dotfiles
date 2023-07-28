@@ -31,4 +31,7 @@ keymap('v', '>', '>gv', default_opts)
 -- keymap('v', '<C-\\>', ':terminal<cr>', default_opts)
 
 -- Toggle tree
-keymap('n', '<C-f>', ':NvimTreeToggle<CR>', default_opts);
+keymap('n', '<C-f>', ':NvimTreeToggle<CR>', default_opts)
+
+-- Execute bash file
+keymap('n', '<C-x>', ':! sh ./%<CR>', default_opts)
