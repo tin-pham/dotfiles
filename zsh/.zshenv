@@ -12,7 +12,7 @@ export SDL_AUDIODRIVER=dsound
 #export NVM_DIR="$XDG_DATA_HOME"/nvm && source "$NVM_DIR/nvm.sh"
 
 # Export
-export HHD="/media/hhd"
+export HHD="/run/media/tinpham/hdd"
 export ZSH="/home/shin/.oh-my-zsh"
 export EDITOR='nvim'
 export VISUAL='nvim'
