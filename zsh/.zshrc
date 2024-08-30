@@ -61,3 +61,24 @@ eval "$(fnm env --use-on-cd)"
 #fi
 #unset __conda_setup
 # <<< conda initialize <<<
+# Function to source all files in a directory
+source_directory() {
+  local dir=$1
+  for file in "$dir"/*; do
+    if [ -f "$file" ] && [ -r "$file" ]; then
+      source "$file"
+    fi
+  done
+}
+
+# Correct path to custom Zsh configuration files
+CUSTOM_ZSH_DIR=~/dotfiles/zsh/.zsh_custom
+
+# Automatically source all subfolders in the correct directory if they exist
+if [ -d "$CUSTOM_ZSH_DIR" ]; then
+  for dir in "$CUSTOM_ZSH_DIR"/*; do
+    if [ -d "$dir" ]; then
+      source_directory "$dir"
+    fi
+  done
+fi

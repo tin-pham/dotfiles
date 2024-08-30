@@ -58,6 +58,3 @@ alias mongod-start='mongod --config ~/.config/mongodb/mongod.cfg'
 
 # Ctags
 alias maketags='ctags -R --exclude=.git --exclude=node_modules .'
-
-# Kubernetes with k3d
-alias create_k3d_cluster='k3d cluster create local -a 1 --port 8080:80@loadbalancer --port 443:443@loadbalancer --api-port <Host-IP>:6443 --servers 1 --k3s-arg "--disable=traefik@server:0"'
