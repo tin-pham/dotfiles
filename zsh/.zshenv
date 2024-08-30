@@ -26,7 +26,8 @@ export NPM_PATH=~/.local/share/npm/bin
 export YARN_PATH="$(yarn global bin)"
 export NVIM_PATH=/opt/nvim-linux64/bin
 export ISTIO_PATH=~/bin/istio-1.23.0/bin
-export PATH=/usr/local/bin:~/.local/bin:~/bin:$FNM_PATH:$NPM_PATH:$YARN_PATH:$NVIM_PATH:$ISTIO_PATH:$PATH 
+export HOME_BIN=~/bin
+export PATH=/usr/local/bin:~/.local/bin:~/bin:$FNM_PATH:$NPM_PATH:$YARN_PATH:$NVIM_PATH:$ISTIO_PATH:$HOME_BIN:$PATH 
 
 export FZF_DEFAULT_OPTS='--preview "bat --style=numbers --color=always --line-range :500 {}"'
 # Fix Background Color in tmux
