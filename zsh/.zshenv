@@ -21,9 +21,12 @@ export MANPAGER="nvim +Man!"
 export PROJECT="$HHD/Coding/Project/shop-ease"
 export BOOKS="$HHD/Documents/Books"
 
+export FNM_PATH=~/.fnm
 export NPM_PATH=~/.local/share/npm/bin
 export YARN_PATH="$(yarn global bin)"
-export PATH=/usr/local/bin:~/.local/bin:~/bin:$NPM_PATH:$YARN_PATH:$PATH 
+export NVIM_PATH=/opt/nvim-linux64/bin
+export ISTIO_PATH=~/bin/istio-1.23.0/bin
+export PATH=/usr/local/bin:~/.local/bin:~/bin:$FNM_PATH:$NPM_PATH:$YARN_PATH:$NVIM_PATH:$ISTIO_PATH:$PATH 
 
 export FZF_DEFAULT_OPTS='--preview "bat --style=numbers --color=always --line-range :500 {}"'
 # Fix Background Color in tmux
@@ -38,11 +41,12 @@ export GLFW_IM_MODULE=ibus
 
 export ZIM_HOME="${XDG_DATA_HOME}/zim"
 
-export TERM="kitty"
+export TERMINFO='/usr/share/terminfo/'
 
 export OPENMW_MODS="$HHD/LutrisGame/gog/the-elder-scrolls-iii-morrowind-goty-edition/mods"
 export OPENMW_CONFIGS="$HOME/.config/openmw"
 export OPENMW_GAME="$HHD/LutrisGame/gog/the-elder-scrolls-iii-morrowind-goty-edition/game"
+
 
 # Ibus
 export XMODIFIERS=@im=ibus

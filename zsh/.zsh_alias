@@ -1,50 +1,63 @@
-# Config 
+# Config Files
 alias rc='v ~/.zshrc'
 alias env='v ~/.zshenv'
 alias ali='v ~/.zsh_alias'
+alias vt="v ~/.config/alacritty/alacritty.yml"
 
-# Alias
+# File Operations
 alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
 
-alias vim='nvim'
-alias v\.='nvim ./'
-alias v='nvim'
-alias vimdiff='nvim -d'
-alias t1='tree -L 1'
-alias t2='tree -L 2'
-alias t3='tree -L 3'
-alias k1='kill %1'
-alias k2='kill %2'
-alias k3='kill %3'
-
-alias lc='colorls --sd'
-alias ls='ls --color'
+# Navigation
 alias cnv='cd ~/.config/nvim'
 alias cw='cd "$PROJECT"'
 alias ct='cd "$HHD/Coding/test"'
 alias cl='cd "$HHD/Coding/Learning2"'
 alias cu='cd ~/Desktop/College/'
-alias cc="ranger $XDG_CONFIG_HOME"
-alias clearswap='rm ~/.local/share/nvim/swap/*'
-
-alias maketags='ctags -R --exclude=.git --exclude=node_modules .'
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
-alias mongod-start='mongod --config ~/.config/mongodb/mongod.cfg'
-
-# Kitty Alias
-alias icat="kitty +kitten icat"
-# Flatpak
-alias discord='flatpak run com.discordapp.Discord'
-
-# Terminal
-alias vt="v ~/.config/alacritty/alacritty.yml"
-
 alias cn='cd "$HDD/notes"'
 
-alias b='WD="$(pwd)";cd "$HHD/Documents/Books";ranger;cd "$WD"'
-alias c='WD="$(pwd)";cd "$HHD/Documents/Cheatsheets";ranger;cd "$WD"'
+# Open Directories with Ranger and Return to Previous Working Directory
+alias b='WD="$(pwd)"; cd "$HHD/Documents/Books"; ranger; cd "$WD"'
+alias c='WD="$(pwd)"; cd "$HHD/Documents/Cheatsheets"; ranger; cd "$WD"'
 
+# Editor and Related Tools
+alias vim='nvim'
+alias v\.='nvim ./'
+alias v='nvim'
+alias vimdiff='nvim -d'
+
+# Terminal Tools
+alias lc='colorls --sd'
+alias ls='ls --color'
+alias clearswap='rm ~/.local/share/nvim/swap/*'
+
+# Tree Command Shortcuts
+alias t1='tree -L 1'
+alias t2='tree -L 2'
+alias t3='tree -L 3'
+
+# Process Management
+alias k1='kill %1'
+alias k2='kill %2'
+alias k3='kill %3'
+
+# Kitty Terminal
+alias icat="kitty +kitten icat"
+
+# Flatpak Applications
+alias discord='flatpak run com.discordapp.Discord'
 alias sioyek='flatpak run com.github.ahrm.sioyek'
+
+# Git and Dotfiles
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias gg='lazygit'
+
+# MongoDB
+alias mongod-start='mongod --config ~/.config/mongodb/mongod.cfg'
+
+# Ctags
+alias maketags='ctags -R --exclude=.git --exclude=node_modules .'
+
+# Kubernetes with k3d
+alias create_k3d_cluster='k3d cluster create local -a 1 --port 8080:80@loadbalancer --port 443:443@loadbalancer --api-port <Host-IP>:6443 --servers 1 --k3s-arg "--disable=traefik@server:0"'

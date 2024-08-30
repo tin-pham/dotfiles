@@ -43,8 +43,7 @@ bindkey '^[^?' backward-kill-dir
 bindkey -e
 bindkey '^ ' autosuggest-accept
 
-
-
+eval "$(fnm env --use-on-cd)"
 # Load Angular CLI autocompletion.
 # source <(ng completion script)
 
