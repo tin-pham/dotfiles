@@ -1,6 +1,7 @@
 return {
 	'lewis6991/impatient.nvim',
 	-- Module
+
 	'nvim-lua/plenary.nvim',
 	module = 'plenary',
 	-- UI
@@ -79,6 +80,7 @@ return {
 		-- This plugin enable in treesitter
 	},
 	{ 'jose-elias-alvarez/typescript.nvim', module = { 'typescript' } },
+
 	----> Trouble
 	{
 		'folke/trouble.nvim',
@@ -93,7 +95,7 @@ return {
 	},
 	---> LSP Saga
 	{
-		'tami5/lspsaga.nvim',
+		'nvimdev/lspsaga.nvim',
 		event = 'VimEnter',
 		cmd = { 'Lspsaga' },
 		config = function()
@@ -168,7 +170,7 @@ return {
 		'numToStr/Comment.nvim',
 		keys = { 'gc', 'gcc', 'gbc' },
 		config = function()
-			require('Comment').setup({})
+			require('Comment').setup()
 		end,
 	},
 	--> Better Winbar
@@ -185,6 +187,12 @@ return {
 		event = 'BufRead',
 		config = function()
 			require('config.project').setup()
+		end,
+	},
+	{
+		'sindrets/diffview.nvim',
+		config = function()
+			require('config.diffview').setup()
 		end,
 	},
 }
