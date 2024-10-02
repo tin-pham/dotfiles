@@ -26,6 +26,8 @@ M.setup = function(servers, options)
 			'sqlfluff',
 			'eslint_d',
 			'js-debug-adapter',
+			'hadolint',
+			'yamllint',
 		},
 		auto_update = true,
 		run_on_start = true,

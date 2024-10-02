@@ -21,7 +21,7 @@ export MANPAGER="nvim +Man!"
 export PROJECT="$HHD/Coding/Project/shop-ease"
 export BOOKS="$HHD/Documents/Books"
 
-export FNM_PATH=~/.fnm
+export FNM_PATH=~/.local/share/fnm
 export NPM_PATH=~/.local/share/npm/bin
 export YARN_PATH="$(yarn global bin)"
 export NVIM_PATH=/opt/nvim-linux64/bin

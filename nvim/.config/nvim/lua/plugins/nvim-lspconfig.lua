@@ -7,7 +7,7 @@ return {
 		'WhoIsSethDaniel/mason-tool-installer.nvim',
 		'folke/neodev.nvim',
 		'RRethy/vim-illuminate',
-		'jose-elias-alvarez/null-ls.nvim',
+		'nvimtools/none-ls.nvim',
 		'b0o/schemastore.nvim',
 	},
 	config = function()

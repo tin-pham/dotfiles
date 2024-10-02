@@ -35,9 +35,9 @@ opt.autochdir = false
 --api.nvim_command('filetype plugin indent on')
 
 api.nvim_create_autocmd('BufEnter', {
-  callback = function()
-    opt.formatoptions = opt.formatoptions - 'c' - 'r' - 'o'
-  end,
+	callback = function()
+		opt.formatoptions = opt.formatoptions - 'c' - 'r' - 'o'
+	end,
 })
 
 -- Native Find --
@@ -71,6 +71,12 @@ vim.cmd([[
 
 -- Close quickfix list after select
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'qf' },
-  command = [[nnoremap <buffer> <CR> <CR>:cclose<CR>]],
+	pattern = { 'qf' },
+	command = [[nnoremap <buffer> <CR> <CR>:cclose<CR>]],
 })
+
+-- Transparent background
+vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'Pmenu', { bg = 'none' })

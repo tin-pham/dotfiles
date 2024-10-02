@@ -1,23 +1,27 @@
 return {
-	'lewis6991/impatient.nvim',
+	{
+		'lewis6991/impatient.nvim',
+	},
 	-- Module
 
-	'nvim-lua/plenary.nvim',
-	module = 'plenary',
+	{
+		'nvim-lua/plenary.nvim',
+		module = 'plenary',
+	},
 	-- UI
 	-->Colorscheme
-	-- {
-	--   'rose-pine/neovim',
-	--   config = function()
-	--     require('config.rose-pine').setup()
-	--   end,
-	-- },
 	{
-		'catppuccin/nvim',
+		'rose-pine/neovim',
 		config = function()
-			require('config.catppuccin').setup()
+			require('config.rose-pine').setup()
 		end,
 	},
+	-- {
+	-- 	'catppuccin/nvim',
+	-- 	config = function()
+	-- 		require('config.catppuccin').setup()
+	-- 	end,
+	-- },
 	-- use {
 	--    'shaunsingh/nord.nvim',
 	--   config = function ()
