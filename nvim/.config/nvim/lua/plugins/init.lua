@@ -16,6 +16,12 @@ return {
 			require('config.rose-pine').setup()
 		end,
 	},
+	 -- {
+	 --   "blazkowolf/gruber-darker.nvim",
+	 -- config = function()
+	 -- 	require('config.gruber').setup()
+	 -- end,
+	 -- },
 	-- {
 	-- 	'catppuccin/nvim',
 	-- 	config = function()
@@ -31,7 +37,7 @@ return {
 
 	-->Better icons
 	{
-		'kyazdani42/nvim-web-devicons',
+	   'nvim-tree/nvim-web-devicons',
 		module = 'nvim-web-devicons',
 		config = function()
 			require('config.web-devicons').setup()
@@ -49,17 +55,17 @@ return {
 	},
 	-- Auto Complete
 
-	{
-		'L3MON4D3/LuaSnip',
-		event = 'InsertEnter',
-		dependencies = {
-			'rafamadriz/friendly-snippets',
-			'saadparwaiz1/cmp_luasnip',
-		},
-		config = function()
-			require('config.luasnip').setup()
-		end,
-	},
+	-- {
+	-- 	'L3MON4D3/LuaSnip',
+	-- 	event = 'InsertEnter',
+	-- 	dependencies = {
+	-- 		'rafamadriz/friendly-snippets',
+	-- 		'saadparwaiz1/cmp_luasnip',
+	-- 	},
+	-- 	config = function()
+	-- 		require('config.luasnip').setup()
+	-- 	end,
+	-- },
 	-->Autopair
 	{
 		'windwp/nvim-autopairs',
@@ -110,9 +116,7 @@ return {
 	--> Telescope
 	{
 		'nvim-telescope/telescope.nvim',
-		cmd = { 'Telescope' },
-		module = 'telescope',
-		keys = { '<leader>f', '<leader>p' },
+    lazy = false,
 		dependencies = {
 			'nvim-lua/plenary.nvim',
 			'nvim-lua/popup.nvim',

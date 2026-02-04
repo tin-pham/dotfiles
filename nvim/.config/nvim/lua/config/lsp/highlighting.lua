@@ -33,6 +33,9 @@ function M.highlight(client)
 end
 
 function M.setup(client)
+   if client.name == 'ts_ls' or client.name == 'tsserver' then
+    return
+  end
 	M.highlight(client)
 end
 

@@ -1,7 +1,20 @@
 local M = {}
 
 function M.setup()
+  -- Helper function for the new keymap system
+  local function on_attach(bufnr)
+    local api = require('nvim-tree.api')
+
+    local function opts(desc)
+      return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+    end
+
+    api.config.mappings.default_on_attach(bufnr)
+    vim.keymap.set('n', 'u', api.tree.change_root_to_parent, opts('Up'))
+  end
+
   require('nvim-tree').setup({
+    on_attach = on_attach,
     actions = {
       open_file = {
         resize_window = true,
@@ -15,17 +28,19 @@ function M.setup()
     sync_root_with_cwd = true,
     respect_buf_cwd = true,
     update_focused_file = { enable = true, update_cwd = false, update_root = true },
-    ignore_ft_on_setup = { 'dashboard' },
+    -- ignore_ft_on_setup = { 'dashboard' }, -- REMOVED (Deprecated)
     view = {
       adaptive_size = true,
-      mappings = {
-        list = {
-          { key = 'u', action = 'dir_up' },
-        },
-      },
+      -- mappings = { ... }, -- REMOVED (Deprecated, moved to on_attach)
+    },
+    git = {
+      enable = true,
+      ignore = true,
     },
     filters = {
-      custom = { '.git' },
+      dotfiles = false,
+      custom = { '.git' }, -- Removed duplicate entry
+      exclude = { '.env', '.env.local' },
     },
     renderer = {
       indent_markers = { enable = true },
@@ -72,7 +87,7 @@ function M.setup()
         return " "
       endfunction
       au BufEnter NvimTree setlocal statusline=%!DisableST()
-      ]],
+    ]],
     false
   )
 end

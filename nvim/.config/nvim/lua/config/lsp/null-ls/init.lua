@@ -5,83 +5,131 @@ function M.setup(opts)
 	local nls_utils = require('null-ls.utils')
 	local b = nls.builtins
 
-	local with_diagnostics_code = function(builtin)
-		return builtin.with({
-			diagnostics_format = '#{m} [#{c}]',
-		})
-	end
-
-	local with_root_file = function(builtin, file)
-		return builtin.with({
-			condition = function(utils)
-				return utils.root_has_file(file)
-			end,
-		})
-	end
-
-	-- enable eslint_d tracking for nvim is running
 	vim.env.ESLINT_D_PPID = vim.fn.getpid()
-	-- disable error when no eslint
 	vim.env.ESLINT_D_MISS = 'ignore'
 
-	-- Helper to conditionally register eslint handlers only if eslint is
-	-- config. If eslint is not configured for a project, it just fails.
-	local function has_eslint_config(utils)
-		return utils.root_has_file({
-			'.eslintrc',
-			'.eslintrc.cjs',
-			'.eslintrc.js',
-			'.eslintrc.json',
-			'eslint.config.cjs',
-			'eslint.config.js',
-			'eslint.config.mjs',
-		})
-	end
+	local start_dir = vim.fn.getcwd()
 
-	local sources = {
-		-- formatting
-		-- b.formatting.prettierd,
-		-- require("none-ls.formatting.eslint_d"),
-		b.formatting.shfmt,
-		b.formatting.clang_format,
-		b.formatting.sqlfluff,
-		b.formatting.stylua,
-
-		-- diagnostics
-		b.diagnostics.sqlfluff.with({ extra_args = { '--dialect', 'postgres' } }),
-		b.diagnostics.hadolint,
-		b.diagnostics.yamllint,
-		require('none-ls.diagnostics.eslint_d').with({
-			condition = has_eslint_config,
-		}),
-		with_root_file(b.diagnostics.selene, 'selene.toml'),
-		require('none-ls-shellcheck.diagnostics'),
-		require('none-ls-shellcheck.code_actions'),
-
-		-- code actions
-		require("none-ls.diagnostics.eslint_d").with({
-      condition = has_eslint_config,
-    }),
-
-		-- hover
-		b.hover.dictionary,
+	-- ---------------------------------------------------------------------------
+	-- ESLint helpers
+	-- ---------------------------------------------------------------------------
+	local eslint_files = {
+		'eslint.config.mjs',
+		'eslint.config.js',
+		'.eslintrc',
+		'.eslintrc.cjs',
+		'.eslintrc.js',
+		'.eslintrc.json',
 	}
 
-	-- Disable stuff on certain filetype
-	vim.cmd([[
-  augroup _env
-   autocmd!
-   autocmd BufEnter .env lua vim.diagnostic.disable(0)
-  augroup end
-]])
+	local function has_eslint_config(utils)
+		return utils.root_has_file(eslint_files)
+	end
 
+	local function eslint_cwd(params)
+		return nls_utils.root_pattern('package.json')(params.bufname) or start_dir
+	end
+
+	-- ---------------------------------------------------------------------------
+	-- Detect TS errors
+	-- ---------------------------------------------------------------------------
+	local function has_ts_errors(bufnr)
+		for _, d in
+			ipairs(vim.diagnostic.get(bufnr, {
+				severity = vim.diagnostic.severity.ERROR,
+			}))
+		do
+			if d.source == 'tsserver' or d.source == 'ts_ls' or d.source == 'typescript' then
+				return true
+			end
+		end
+		return false
+	end
+
+	-- ---------------------------------------------------------------------------
+	-- ESLint namespace
+	-- ---------------------------------------------------------------------------
+	local eslint_ns = vim.api.nvim_create_namespace('eslint-diagnostics')
+
+	-- Mark when TS diagnostics are ready
+	vim.api.nvim_create_autocmd('DiagnosticChanged', {
+		callback = function(args)
+			local bufnr = args.buf
+			for _, d in ipairs(vim.diagnostic.get(bufnr)) do
+				if d.source == 'tsserver' or d.source == 'ts_ls' or d.source == 'typescript' then
+					vim.b[bufnr].ts_ready = true
+					return
+				end
+			end
+		end,
+	})
+
+	-- ---------------------------------------------------------------------------
+	-- Hide / show ESLint diagnostics dynamically
+	-- ---------------------------------------------------------------------------
+	vim.api.nvim_create_autocmd({ 'DiagnosticChanged', 'BufEnter' }, {
+		callback = function(args)
+			local bufnr = args.buf or vim.api.nvim_get_current_buf()
+			if not vim.api.nvim_buf_is_loaded(bufnr) then
+				return
+			end
+
+			local ft = vim.bo[bufnr].filetype
+			if not (ft == 'javascript' or ft == 'javascriptreact' or ft == 'typescript' or ft == 'typescriptreact') then
+				return
+			end
+
+			if has_ts_errors(bufnr) then
+				vim.diagnostic.hide(eslint_ns, bufnr)
+			else
+				vim.diagnostic.show(eslint_ns, bufnr)
+			end
+		end,
+	})
+
+	-- ---------------------------------------------------------------------------
+	-- ESLint config
+	-- ---------------------------------------------------------------------------
+	local eslint_config = {
+		condition = function(utils)
+			return has_eslint_config(utils)
+		end,
+		cwd = eslint_cwd,
+		diagnostics_namespace = eslint_ns,
+	}
+
+	-- ---------------------------------------------------------------------------
+	-- Sources
+	-- ---------------------------------------------------------------------------
+	local sources = {
+		-- Formatting
+    require('none-ls.diagnostics.eslint_d').with(vim.tbl_extend('force', eslint_config, {
+  condition = function(utils)
+    local bufnr = vim.api.nvim_get_current_buf()
+    return has_eslint_config(utils)
+      and vim.b[bufnr].ts_ready == true
+  end,
+})),
+		b.formatting.stylua,
+		b.formatting.shfmt,
+
+		-- Diagnostics
+		require('none-ls.diagnostics.eslint_d').with(eslint_config),
+
+		-- Code actions
+		require('none-ls.code_actions.eslint_d').with(eslint_config),
+	}
+
+	-- ---------------------------------------------------------------------------
+	-- Setup none-ls
+	-- ---------------------------------------------------------------------------
 	nls.setup({
-		-- debug = true,
-		debounce = 150,
-		save_after_format = false,
 		sources = sources,
 		on_attach = opts.on_attach,
-		root_dir = nls_utils.root_pattern('.git'),
+    root_dir = require('lspconfig.util').root_pattern(
+  'package.json',
+  '.git'
+),
 	})
 end
 

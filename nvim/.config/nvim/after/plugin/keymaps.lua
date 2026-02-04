@@ -35,3 +35,10 @@ keymap('n', '<C-f>', ':NvimTreeToggle<CR>', default_opts)
 
 -- Execute bash file
 keymap('n', '<C-x>', ':! sh ./%<CR>', default_opts)
+
+vim.keymap.set('n', '<leader>er', function()
+  -- This stops and immediately restarts
+  vim.fn.system('eslint_d restart')
+  vim.cmd('LspRestart')
+  vim.notify('ESLint daemon restarted', vim.log.levels.INFO)
+end, { desc = 'Restart ESLint daemon' })

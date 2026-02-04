@@ -4,8 +4,24 @@ local servers = {
 	angularls = {},
 	graphql = {},
 	vimls = {},
-	tsserver = {},
-	bufls = {},
+	buf_ls = {},
+	ts_ls = {
+		init_options = {
+			hostInfo = 'neovim',
+			maxTsServerMemory = 4096,
+			preferences = {
+				includeInlayParameterNameHints = 'none',
+				includeCompletionsForImportStatements = false,
+			},
+		},
+		settings = {
+			typescript = {
+				tsserver = {
+					useSeparateSyntaxServer = false,
+				},
+			},
+		},
+	},
 	cucumber_language_server = {},
 	jsonls = {
 		settings = {
@@ -26,7 +42,7 @@ local servers = {
 		},
 	},
 	jdtls = {},
-	sumneko_lua = {
+	lua_ls = {
 		settings = {
 			Lua = {
 				runtime = {
@@ -61,21 +77,16 @@ local servers = {
 }
 
 local function on_attach(client, bufnr)
-	-- Enable completion triggered by <C-X><C-O>
-	-- See `:help omnifunc` and `:help ins-completion` for more information.
 	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-	-- Use LSP as the handler for formatexpr.
-	-- See `:help formatexpr` for more information.
 	vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
 
-	-- Configure key mappings
+	if client.name == 'ts_ls' or client.name == 'tsserver' then
+		client.server_capabilities.documentFormattingProvider = false
+		client.server_capabilities.documentRangeFormattingProvider = false
+	end
+
 	require('config.lsp.keymaps').setup(client, bufnr)
-
-	-- Configure highlighting
 	require('config.lsp.highlighting').setup(client)
-
-	-- Configure formatting
 	require('config.lsp.null-ls.formatters').setup(client, bufnr)
 end
 

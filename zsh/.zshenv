@@ -27,7 +27,8 @@ export YARN_PATH="$(yarn global bin)"
 export NVIM_PATH=/opt/nvim-linux64/bin
 export ISTIO_PATH=~/bin/istio-1.23.0/bin
 export HOME_BIN=~/bin
-export PATH=/usr/local/bin:~/.local/bin:~/bin:$FNM_PATH:$NPM_PATH:$YARN_PATH:$NVIM_PATH:$ISTIO_PATH:$HOME_BIN:$PATH 
+export MASON_PATH="$HOME/.local/share/nvim/mason/bin"
+export PATH="/usr/local/bin:$HOME/.local/bin:$HOME_BIN:$FNM_PATH:$NPM_PATH:$YARN_PATH:$NVIM_PATH:$ISTIO_PATH:$MASON_PATH:$PATH"
 
 export FZF_DEFAULT_OPTS='--preview "bat --style=numbers --color=always --line-range :500 {}"'
 # Fix Background Color in tmux
@@ -55,3 +56,5 @@ export GTK_IM_MODULE=ibus
 export QT_IM_MODULE=ibus
 
 export OPENAI_API_KEY=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
+export AVANTE_GEMINI_API_KEY="AIzaSyCIyaf8fflt-dQQ_5lG4nNzbMMCTdDAz24"
+export ESLINT_USE_FLAT_CONFIG=true
