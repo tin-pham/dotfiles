@@ -4,7 +4,7 @@ M.setup = function()
 	saga.setup({
 		code_action_prompt = { enable = false },
 		symbols_in_winbar = {
-			enable = true,
+			enable = false,
 		},
 	})
 end

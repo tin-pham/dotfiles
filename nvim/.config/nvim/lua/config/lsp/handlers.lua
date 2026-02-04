@@ -68,7 +68,11 @@ function M.setup()
 			-- Check if there are TS errors
 			local has_ts_errors = false
 			for _, diagnostic in ipairs(ts_diagnostics) do
-				if diagnostic.source == 'ts_ls' or diagnostic.source == 'typescript' or diagnostic.source == 'tsserver' then
+				if
+					diagnostic.source == 'ts_ls'
+					or diagnostic.source == 'typescript'
+					or diagnostic.source == 'tsserver'
+				then
 					has_ts_errors = true
 					break
 				end
@@ -90,8 +94,7 @@ function M.setup()
 	vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, lsp.float)
 
 	-- Signature help configuration
-	vim.lsp.handlers['textDocument/signatureHelp'] =
-		vim.lsp.with(vim.lsp.handlers.signature_help, lsp.float)
+	vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, lsp.float)
 end
 
 return M

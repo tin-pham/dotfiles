@@ -1,80 +1,76 @@
 local M = {}
 
 M.setup = function(servers, options)
-    local lspconfig = require('lspconfig')
-    local icons = require('config.icons')
+	local lspconfig = require('lspconfig')
+	local icons = require('config.icons')
 
-    -- 1. Setup Mason (Package Manager)
-    require('mason').setup({
-        ui = {
-            icons = {
-                package_installed = icons.server_installed,
-                package_pending = icons.server_pending,
-                package_uninstalled = icons.server_uninstalled,
-            },
-        },
-    })
+	require('mason').setup({
+		ui = {
+			icons = {
+				package_installed = icons.server_installed,
+				package_pending = icons.server_pending,
+				package_uninstalled = icons.server_uninstalled,
+			},
+		},
+	})
 
-    -- 2. Setup Mason Tool Installer (Formatters/Linters)
-    require('mason-tool-installer').setup({
-        ensure_installed = {
-            'prettierd',
-            'shfmt',
-            'fixjson',
-            'stylua',
-            'selene',
-            'shellcheck',
-            'clang-format',
-            'sqlfluff',
-            'eslintd',
-            'js-debug-adapter',
-            'hadolint',
-            'yamllint',
-        },
-        auto_update = true,
-        run_on_start = true,
-    })
+	require('mason-tool-installer').setup({
+		ensure_installed = {
+			'prettierd',
+			'shfmt',
+			'fixjson',
+			'stylua',
+			'selene',
+			'shellcheck',
+			'clang-format',
+			'sqlfluff',
+			'eslint_d',
+			'js-debug-adapter',
+		},
+		auto_update = false,
+		run_on_start = false,
+	})
 
-    -- 3. Setup Mason LSP Config (The Bridge)
-    -- FIXED: We define 'handlers' inside setup() instead of calling setup_handlers() separately
-    require('mason-lspconfig').setup({
-        ensure_installed = vim.tbl_keys(servers),
-        automatic_installation = false,
-        handlers = {
-            -- The default handler (runs for servers not explicitly listed below)
-            function(server_name)
-                local opts = vim.tbl_deep_extend('force', options, servers[server_name] or {})
-                lspconfig[server_name].setup(opts)
-            end,
+	pcall(function()
+		require('neodev').setup({})
+	end)
 
-            -- Dedicated handler for Lua
-            ['lua_ls'] = function()
-                -- Note: 'sumneko_lua' is deprecated, changed to 'lua_ls'
-                local opts = vim.tbl_deep_extend('force', options, servers['lua_ls'] or servers['sumneko_lua'] or {})
-                -- Note: neodev is deprecated in favor of lazydev.nvim, but keeping your config working:
-                lspconfig.lua_ls.setup(require('neodev').setup({ lspconfig = opts }))
-            end,
+	require('mason-lspconfig').setup({
+		ensure_installed = vim.tbl_keys(servers),
+		automatic_installation = false,
+		handlers = {
+			function(server_name)
+				if server_name == 'ts_ls' then
+					return
+				end
 
-            -- Dedicated handler for TypeScript
-            -- Note: 'tsserver' was recently renamed to 'ts_ls' in nvim-lspconfig
-            ['ts_ls'] = function()
-                local opts = vim.tbl_deep_extend('force', options, servers['ts_ls'] or servers['tsserver'] or {})
-                
-                -- Check if the deprecated 'typescript.nvim' plugin is actually loaded
-                local status_ok, typescript = pcall(require, "typescript")
-                if status_ok then
-                    typescript.setup({
-                        disable_commands = false,
-                        debug = false,
-                        server = opts,
-                    })
-                else
-                    -- Fallback if the plugin is missing/archived
-                    lspconfig.ts_ls.setup(opts)
-                end
-            end,
-        }
-    })
+				if not servers[server_name] then
+					return
+				end
+
+				-- Use vim.tbl_deep_extend with 'force' to preserve root_dir
+				local server_config = servers[server_name] or {}
+				local opts = vim.tbl_deep_extend('force', {}, options, server_config)
+
+				lspconfig[server_name].setup(opts)
+			end,
+
+			['lua_ls'] = function()
+				if servers['lua_ls'] then
+					local opts = vim.tbl_deep_extend('force', {}, options, servers['lua_ls'])
+					lspconfig.lua_ls.setup(opts)
+				end
+			end,
+
+			['vtsls'] = function()
+				if servers['vtsls'] then
+					-- Important: merge in the correct order so root_dir isn't overwritten
+					local opts = vim.tbl_deep_extend('force', {}, options, servers['vtsls'])
+					lspconfig.vtsls.setup(opts)
+				end
+			end,
+		},
+	})
 end
 
 return M

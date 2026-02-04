@@ -9,32 +9,34 @@ local nls_sources = require('null-ls.sources')
 M.autoformat = true
 
 function M.format()
-   if M.autoformat then
-    local view = vim.fn.winsaveview()
-    vim.lsp.buf.format({
-      async = true,
-      filter = function(client)
-        return client.name ~= 'ts_ls'
-          and client.name ~= 'jsonls'
-          and client.name ~= 'html'
-          and client.name ~= 'sumneko_lua'
-          and client.name ~= 'jdtls'
-      end,
-    })
-    vim.fn.winrestview(view)
-  end
+	if M.autoformat then
+		local view = vim.fn.winsaveview()
+		vim.lsp.buf.format({
+			async = false,
+			timeout_ms = 5000,
+			filter = function(client)
+				return client.name ~= 'ts_ls'
+					and client.name ~= 'vtsls'
+					and client.name ~= 'jsonls'
+					and client.name ~= 'html'
+					and client.name ~= 'sumneko_lua'
+					and client.name ~= 'jdtls'
+			end,
+		})
+		vim.fn.winrestview(view)
+	end
 end
 
-  function M.setup(client, buf)
-   -- Just attach format-on-save once per buffer
-  if client.server_capabilities.documentFormattingProvider then
-    vim.cmd([[
+function M.setup(client, buf)
+	-- Just attach format-on-save once per buffer
+	if client.server_capabilities.documentFormattingProvider then
+		vim.cmd([[
       augroup LspFormat
         autocmd! * <buffer>
         autocmd BufWritePre <buffer> lua require('config.lsp.null-ls.formatters').format()
       augroup END
     ]])
-  end
+	end
 end
 
 function M.has_formatter(filetype)

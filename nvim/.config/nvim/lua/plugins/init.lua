@@ -16,12 +16,12 @@ return {
 			require('config.rose-pine').setup()
 		end,
 	},
-	 -- {
-	 --   "blazkowolf/gruber-darker.nvim",
-	 -- config = function()
-	 -- 	require('config.gruber').setup()
-	 -- end,
-	 -- },
+	-- {
+	--   "blazkowolf/gruber-darker.nvim",
+	-- config = function()
+	-- 	require('config.gruber').setup()
+	-- end,
+	-- },
 	-- {
 	-- 	'catppuccin/nvim',
 	-- 	config = function()
@@ -37,7 +37,7 @@ return {
 
 	-->Better icons
 	{
-	   'nvim-tree/nvim-web-devicons',
+		'nvim-tree/nvim-web-devicons',
 		module = 'nvim-web-devicons',
 		config = function()
 			require('config.web-devicons').setup()
@@ -116,7 +116,7 @@ return {
 	--> Telescope
 	{
 		'nvim-telescope/telescope.nvim',
-    lazy = false,
+		lazy = false,
 		dependencies = {
 			'nvim-lua/plenary.nvim',
 			'nvim-lua/popup.nvim',
@@ -188,13 +188,6 @@ return {
 		dependencies = 'nvim-web-devicons',
 		config = function()
 			require('config.winbar').setup()
-		end,
-	},
-	{
-		'ahmedkhalf/project.nvim',
-		event = 'BufRead',
-		config = function()
-			require('config.project').setup()
 		end,
 	},
 	{
